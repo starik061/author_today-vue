@@ -1,19 +1,15 @@
 <template>
-  <div class="about">
-    <SupportPageHeader />
-  </div>
+
+  <SupportPageHeader />
+  <SupportPageMainBanner />
+  <SupportPageFooter />
+
 </template>
 
 <script setup>
 import SupportPageHeader from '@/components/SupportPageHeader.vue'
+import SupportPageMainBanner from '@/components/SupportPageMainBanner.vue'
+import SupportPageFooter from '@/components/SupportPageFooter.vue'
 </script>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style></style>
