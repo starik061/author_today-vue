@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+// @ts-ignore
 import SupportPage from "@/pages/SupportPage.vue";
 
 const router = createRouter({
