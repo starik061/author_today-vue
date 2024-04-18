@@ -1,8 +1,12 @@
 <template>
   <div class="about">
-    <h1>This is the support page</h1>
+    <SupportPageHeader />
   </div>
 </template>
+
+<script setup>
+import SupportPageHeader from '@/components/SupportPageHeader.vue'
+</script>
 
 <style>
 @media (min-width: 1024px) {

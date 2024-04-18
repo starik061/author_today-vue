@@ -1,3 +1,5 @@
+@import "variables";
+
 *,
 *::before,
 *::after {
@@ -8,10 +10,27 @@
 
 body {
   min-height: 100vh;
+  position: relative;
   font-family: "TildaSans", Arial, sans-serif;
   font-size: 18px;
+  font-weight: 300;
   line-height: 1.55;
+  color: rgb(0, 0, 0);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "nrd-and-open",
+      "type": "shell",
+      "command": "start chrome 'http://localhost:5173/' && npm run dev",
+      "windows": {
+        "command": "start chrome 'http://localhost:5173/' && npm run dev"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
