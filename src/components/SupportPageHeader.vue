@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header :style="{ backgroundColor: props.isOpaque ? 'rgba(0, 0, 0, 1)' : 'rgba(0, 0, 0, 0.5)' }">
         <div class="main-container">
             <nav>
                 <a href="https://author.today/"><img class="logo" src="../../public/author_today-logo.png"
@@ -15,7 +15,14 @@
 </template>
 
 <script setup>
+import { defineProps } from 'vue';
 
+const props = defineProps({
+    isOpaque: {
+        type: Boolean,
+        default: false
+    }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -30,6 +37,7 @@ header {
     width: 100%;
     height: 80px;
     background-color: var(--bg-color-black);
+
 }
 
 nav {

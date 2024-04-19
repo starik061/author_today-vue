@@ -25,6 +25,6 @@ footer {
 }
 
 .footer-text:first-child {
-margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 </style>

@@ -18,8 +18,4 @@ import ToTopBtnIcon from '@/components/icons/ToTopBtnIcon.vue'
     outline: none;
     cursor: pointer;
 }
-
-.not-displayed {
-    display: none;
-}
 </style>
