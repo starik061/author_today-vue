@@ -22,6 +22,8 @@ body {
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -53,4 +55,11 @@ button {
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+.support-page-section-header {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 47px;
+  margin: 0 0 40px;
 }
