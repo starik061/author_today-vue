@@ -49,7 +49,7 @@
 
 <style lang="scss" scoped>
 .about-us-section {
-    padding: 120px 0 60px;
+    padding: 120px 0 30px;
 }
 
 .paragraf {

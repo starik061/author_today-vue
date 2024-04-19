@@ -5,7 +5,7 @@
                 <a href="https://author.today/"><img class="logo" src="../../public/author_today-logo.png"
                         alt="Author Today logo" /></a>
                 <ul class="nav-list">
-                    <li class="nav-list_item"><a class="nav-link" href="#">Чаво</a></li>
+                    <li class="nav-list_item"><a class="nav-link" href="#">ЧаВо</a></li>
                     <li class="nav-list_item"><a class="nav-link" href="#">Специалисты</a></li>
                     <li class="nav-list_item"><a class="nav-link" href="#">Написать нам</a></li>
                 </ul>
@@ -65,7 +65,6 @@ nav {
 .nav-link {
     font-size: 16px;
     font-weight: 600;
-    text-transform: capitalize;
     color: var(--text-color-first);
 }
 </style>
