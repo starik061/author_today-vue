@@ -14,7 +14,7 @@
                     Иннокентий.<br />Бойтесь Иннокентия!</p>
 
                 <div class="main-banner__link-wrapper"><a class="main-banner__link" href="">Написать нам</a><a
-                        class="main-banner__link secondary" href="">Чаво</a>
+                        class="main-banner__link secondary" href="">ЧаВо</a>
                 </div>
             </div>
         </div>
