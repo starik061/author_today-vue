@@ -16,50 +16,67 @@
                     </button>
                     <div class="question-answer">
                         <ul>
-                            <li>
-                                <h3>Лайфхак №1</h3>
-                                <p>Служба поддержки не решает вопросы, связанные с коммерческим статусом.</p>
+                            <li class="lifehack-list-item">
+                                <h3 class="question-answer-header">Лайфхак №1</h3>
+                                <p class="paragraf-with-margin">Служба поддержки не решает вопросы, связанные с
+                                    коммерческим статусом.</p>
                                 <p>Если ваш вопрос связан с:</p>
-                                <ul>
-                                    <li>Получением эксклюзива;</li>
-                                    <li>Открытием коммерческого статуса;</li>
-                                    <li>Выводом средств;</li>
-                                    <li>Заморозкой/разморозкой продаж;</li>
-                                    <li>Необходимостью стартовать продажи, если функционал для вас ограничен за
+                                <ul class="question-reasons-list">
+                                    <li class="question-reasons-list-item">Получением эксклюзива;</li>
+                                    <li class="question-reasons-list-item">Открытием коммерческого статуса;</li>
+                                    <li class="question-reasons-list-item">Выводом средств;</li>
+                                    <li class="question-reasons-list-item">Заморозкой/разморозкой продаж;</li>
+                                    <li class="question-reasons-list-item">Необходимостью стартовать продажи, если
+                                        функционал для вас ограничен за
                                         многочисленные
                                         нарушения сроков договора;</li>
-                                    <li>Изменением реквизитов;</li>
-                                    <li>Другими моментами, напрямую связанными с продажами книг либо документацией...
+                                    <li class="question-reasons-list-item">Изменением реквизитов;</li>
+                                    <li class="question-reasons-list-item">Другими моментами, напрямую связанными с
+                                        продажами книг либо документацией...
                                     </li>
                                 </ul>
-                                <p><span>Пожалуйста, связывайтесь с коммерческим отделом напрямую!</span> Увы, мы не
+                                <p><strong class="important">Пожалуйста, связывайтесь с коммерческим отделом
+                                        напрямую!</strong> Увы, мы не
                                     сможем вам
                                     помочь, а
                                     время решения вопроса сильно затянется (сначала очередь обращений у нас, потом
                                     очередь
                                     обращений у ком.отдела, а там и рабочий день подойдёт к концу).</p>
                             </li>
-                            <li>
-                                <h3>Лайфхак №2</h3>
-                                <p>Марина и Мария — это разные имена и разные люди. Совсем. Честное слово :)
+                            <li class="lifehack-list-item">
+                                <h3 class="question-answer-header">Лайфхак №2</h3>
+                                <p class="paragraf-with-margin">Марина и Мария — это разные имена и разные люди. Совсем.
+                                    Честное слово :)
                                 </p>
-                                <p>Марина (Марина Д., руководитель по вопросам совместных мероприятий, продвижения и
-                                    сотрудничества) не занималась и не занимается вопросами коммерческого отдела.
-                                    С руководителем коммерческого отдела Марией больше нельзя связаться напрямую на
+                                <p><strong class="important">Марина</strong> (Марина Д., руководитель по вопросам
+                                    совместных
+                                    мероприятий, продвижения и
+                                    сотрудничества) не занималась и не занимается вопросами коммерческого
+                                    отдела.<br />
+                                    С руководителем коммерческого отдела <strong class="important">Марией</strong>
+                                    больше нельзя связаться напрямую
+                                    на
                                     сайте.
-                                    За время работы АТ функционал коммерческого отдела был существенно расширен, и
-                                    сейчас многие функции автоматизированы. Однако, если вам необходимо обратиться с
-                                    каким-то вопросом напрямую в ЛС, пожалуйста, пишите Елене (СБ и ВС выходные дни).
+                                    За время работы АТ функционал коммерческого отдела был существенно расширен,
+                                    и
+                                    сейчас многие функции автоматизированы. Однако, если вам необходимо
+                                    обратиться с
+                                    каким-то вопросом напрямую в ЛС, пожалуйста, пишите <a class="link-to-elena"
+                                        href="https://author.today/u/authortoday_ks" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <strong>Елене</strong></a> (СБ и ВС выходные
+                                    дни).
                                 </p>
                             </li>
-                            <li>
-                                <h3>Лайфхак №3</h3>
+                            <li class="lifehack-list-item">
+                                <h3 class="question-answer-header">Лайфхак №3</h3>
                                 <p>С вопросами о:</p>
-                                <ul>
-                                    <li>Добавлении промокодов для генерации;</li>
-                                    <li>Подключении Яндекс Метрики;</li>
-                                    <li>Покупке книг и дублях оплаты;</li>
-                                    <li>Прочих технических моментах, связанных исключительно с функционалом сайта...
+                                <ul class="question-reasons-list">
+                                    <li class="question-reasons-list-item">Добавлении промокодов для генерации;</li>
+                                    <li class="question-reasons-list-item">Подключении Яндекс Метрики;</li>
+                                    <li class="question-reasons-list-item">Покупке книг и дублях оплаты;</li>
+                                    <li class="question-reasons-list-item">Прочих технических моментах, связанных
+                                        исключительно с функционалом сайта...
                                     </li>
                                 </ul>
                                 <p>...вы можете обратиться к нам, в раздел технических вопросов. Мы будем рады помочь.
@@ -261,5 +278,39 @@ const openQuestionDescription = (index) => {
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--transition);
+}
+
+.question-answer-header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--decor-color-first);
+}
+
+.paragraf-with-margin {
+    margin-bottom: 30px;
+}
+
+.question-reasons-list {
+    margin-bottom: 10px;
+    list-style-type: disc;
+}
+
+.question-reasons-list-item {
+    margin-left: 20px;
+}
+
+.important {
+    color: var(--decor-color-first);
+}
+
+.lifehack-list-item {
+    margin-bottom: 30px;
+}
+
+.link-to-elena {
+    color: var(--decor-color-first);
+    border-bottom: 1px solid var(--decor-color-first);
 }
 </style>
