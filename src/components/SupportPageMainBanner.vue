@@ -29,7 +29,6 @@
 <style lang="scss" scoped>
 .main-banner {
     position: relative;
-    width: 100vw;
     height: 100vh;
     background-image: url(/public/main-banner.jpg);
     background-position: center center;
@@ -59,18 +58,19 @@
     align-items: flex-start;
 
     & .main-banner__text:first-of-type {
-        margin-bottom: 30px;
+        margin-bottom: 28px;
     }
 
     & .main-banner__text:last-of-type {
-        margin-bottom: 70px;
+        margin-bottom: 80px;
     }
 
     .main-banner__header {
-        padding-bottom: 20px;
+        margin-bottom: 20px;
         font-size: 38px;
         font-weight: 600;
         line-height: 34px;
+        letter-spacing: 1px;
         color: var(--text-color-first);
     }
 }

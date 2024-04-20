@@ -1,7 +1,7 @@
 <template>
     <section class="about-us-section">
         <div class="main-container">
-            <h2 class="support-page-section-header">О нас</h2>
+            <h2 class="support-page-section-header section-header">О нас</h2>
             <p class="paragraf">На Автор Тудей существует несколько основных направлений поддержки
                 пользователей:
             </p>
@@ -52,12 +52,16 @@
     padding: 120px 0 30px;
 }
 
+.section-header {
+    margin-bottom: 45px;
+}
+
 .paragraf {
-    margin: 0 0 40px;
+    margin: 0 0 35px;
 }
 
 .list {
-    margin-bottom: 105px;
+    margin-bottom: 120px;
 }
 
 .list-item {
@@ -83,7 +87,7 @@
     display: flex;
     gap: 40px;
     flex-wrap: nowrap;
-    margin-bottom: 83px;
+    margin-bottom: 88px;
 }
 
 .support-description--item {

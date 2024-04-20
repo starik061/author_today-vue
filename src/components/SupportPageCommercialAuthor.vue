@@ -5,7 +5,7 @@
                     alt="decorative image">
             </div>
             <div class="content-element">
-                <h2 class="support-page-section-header">Коммерческий автор?</h2>
+                <h2 class="support-page-section-header section-header">Коммерческий автор?</h2>
                 <p class="other-department-text">Возможно, твой вопрос предназначен другому отделу</p>
                 <p class="text-content with-margin">Авторы часто не обращают внимания на различия в работе разных
                     отделов Автор
@@ -29,7 +29,7 @@
 
 <style lang="scss" scoped>
 .commercial-author-section {
-    padding-top: 135px;
+    padding: 138px 0 10px;
 }
 
 .content-wrapper {
@@ -47,8 +47,12 @@
 
 .img-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+}
+
+.section-header {
+    margin-bottom: 35px;
 }
 
 .other-department-text {
@@ -62,7 +66,7 @@
     line-height: 28px;
 
     &.with-margin {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     & a {

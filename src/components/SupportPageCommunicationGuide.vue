@@ -78,7 +78,7 @@
 }
 
 .section-header {
-    margin-bottom: 95px;
+    margin-bottom: 90px;
     text-align: center;
 }
 
@@ -86,14 +86,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    padding-bottom: 90px;
+    padding-bottom: 80px;
 }
 
 .communication-rules-list-item {
     flex-basis: calc(50% - 20px);
     display: flex;
     gap: 30px;
-    padding: 30px 30px 40px;
+    padding: 27px 30px 40px;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
@@ -117,7 +117,7 @@
 
 .communication-rule-header {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-size: 22px;
     font-weight: 600;
     color: var(--decor-color-first);
