@@ -19,7 +19,7 @@ const props = defineProps({
 });
 </script>
 
-<style>
+<style lang="scss" scoped>
 svg {
     width: 24px;
     height: 24px;
