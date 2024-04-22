@@ -1,6 +1,6 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "vueform.config.ts"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "noImplicitAny": false, //!отключает ошибку TypeScript "Could not find a declaration file for module
