@@ -1,0 +1,60 @@
+// ! Переопределяющие стили для Vueform
+:root,
+:before,
+:after,
+* {
+    --vf-primary: rgb(4, 145, 206);
+    --vf-danger: rgb(255, 0, 0);
+    --vf-color-input: rgb(0, 0, 0);
+    --vf-border-color-input: rgb(0, 0, 0);
+    --vf-bg-btn: var(--decor-color-first);
+    --vf-ring-width: 0;
+    --vf-radius-input: 0;
+    --vf-font-size: 16px;
+    --vf-line-height: 1.33;
+    --vf-min-height-input: 60px;
+    --vf-border-color-input-danger: var(--vf-danger);
+    --vf-border-color-input-focus: none;
+    --vf-gutter: 25px;
+    --vf-px-input: 25px;
+    --vf-py-input: 13px;
+    --vf-px-btn: 60px;
+    --vf-py-btn: 1px;
+    --vf-bg-icon: rgb(0, 0, 0);
+}
+
+.vf-label {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 31px;
+    padding-bottom: 5px;
+    color: var(--bg-color-black)
+}
+
+.vf-layout-inner-container .vf-layout-inner-wrapper-before {
+    padding-bottom: 15px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgb(134, 134, 134);
+}
+
+.vf-input-field::placeholder {
+    font-size: 17px;
+    font-weight: 300;
+    color: rgb(134, 134, 134);
+}
+
+.vf-btn-primary {
+    min-height: 60px;
+    font-weight: 700;
+}
+
+.vf-btn.vf-btn-secondary {
+    min-height: 40px;
+    padding: 0 20px;
+    background-color: var(--vf-bg-btn);
+    border-color: var(--vf-bg-btn);
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+}

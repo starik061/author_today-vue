@@ -8,5 +8,7 @@ import "@vueform/vueform/dist/vueform.css";
 export default defineConfig({
   theme: vueform,
   locales: { ru },
-  locale: "ru"
+  locale: "ru",
+  classHelpers: true,
+  floatPlaceholders: false
 });

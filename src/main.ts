@@ -1,5 +1,3 @@
-import "./assets/main.scss";
-
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
@@ -16,3 +14,6 @@ app.use(router);
 app.use(Vueform, vueformConfig);
 
 app.mount("#app");
+
+import "./assets/vueform_custom_styles.scss";
+import "./assets/main.scss";
