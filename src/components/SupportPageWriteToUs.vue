@@ -8,6 +8,10 @@
                 1-2 суток.<br />
                 <strong>Внимание! Служба поддержки НЕ решает вопросы коммерческого<br />отдела!</strong>
             </p>
+
+            <Vueform>
+                <TextElement name="hello_world" label="Hello" placeholder="World" />
+            </Vueform>
         </div>
     </section>
 
