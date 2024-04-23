@@ -1,11 +1,11 @@
 <template>
-    <section class="support-specialists-section">
+    <section class="support-specialists-section" id="specialists">
         <div class="main-container text-wrapper">
             <h2 class="support-page-section-header">Специалисты<br />
                 службы поддержки</h2>
             <p class="instruction-text">Пожалуйста, прежде, чем написать нам, ознакомьтесь с информацией<br />ниже и
                 проверьте список вопросов
-                <a class="link-to-faq" href="#">ЧаВо</a>.<br />
+                <a class="link-to-faq" href="#faq">ЧаВо</a>.<br />
                 Возможно, там уже есть нужный вам ответ
             </p>
             <ul class="specialist-list">

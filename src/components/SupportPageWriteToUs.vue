@@ -1,5 +1,5 @@
 <template>
-    <section class="write-to-us-section">
+    <section class="write-to-us-section" id="write-us">
         <div class="main-container text-wrapper">
             <h2 class="support-page-section-header section-header">Напишите нам прямо здесь:</h2>
             <p class="support-description-text">Проверяйте тему обращения и указанные ссылки.<br />

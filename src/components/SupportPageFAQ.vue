@@ -205,7 +205,7 @@
 
     </div>
 
-    <div class="main-container section-immitation">
+    <div class="main-container section-immitation" id="faq">
       <h2 class="support-page-section-header section-header">Часто задаваемые вопросы</h2>
       <p class="center-text">Ниже собран список вопросов, с которыми мы встречаемся чаще всего. Это общие вопросы,
         не требующие индивидуального<br /> рассмотрения проблемы и плотного общения с сотрудником службы поддержки,

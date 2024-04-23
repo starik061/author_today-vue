@@ -5,9 +5,9 @@
                 <a href="https://author.today/"><img class="logo" src="../../public/author_today-logo.png"
                         alt="Author Today logo" /></a>
                 <ul class="nav-list">
-                    <li class="nav-list_item"><a class="nav-link" href="#">ЧаВо</a></li>
-                    <li class="nav-list_item"><a class="nav-link" href="#">Специалисты</a></li>
-                    <li class="nav-list_item"><a class="nav-link" href="#">Написать нам</a></li>
+                    <li class="nav-list_item"><a class="nav-link" href="#faq">ЧаВо</a></li>
+                    <li class="nav-list_item"><a class="nav-link" href="#specialists">Специалисты</a></li>
+                    <li class="nav-list_item"><a class="nav-link" href="#write-us">Написать нам</a></li>
                 </ul>
             </nav>
         </div>
