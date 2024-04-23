@@ -10,8 +10,9 @@
             </p>
         </div>
         <div class=" form-container">
+
             <Vueform>
-                <SelectElement name="support-subject" :native="true" :items="[
+                <SelectElement class="hide-select-before" name="support-subject" :native="true" :items="[
                     'Я автор. Техническая проблема',
                     'Я читатель. Техническая проблема',
                     'Нарушение правил сайта',
@@ -22,21 +23,30 @@
                     'Предложение по работе сайта',
                     'Другое'
                 ]" label="Тема обращения" default="Нарушение правил сайта" />
-                <TextElement name="problem-link" label="Ссылка на проблему, если нужна"
-                    placeholder="https://author.today/..." before="Проверьте ссылку. Чем она точнее, тем лучше" />
-                <TextElement name="at-profile-link" label="Ваш профиль на Автор Тудей"
+
+                <TextElement name=" problem-link" label="Ссылка на проблему, если нужна" input-type="url"
+                    placeholder="https://author.today/..." before="Проверьте ссылку. Чем она точнее, тем лучше"
+                    :rules="['nullable', 'url',]" :messages="{
+                        url: 'Укажите, пожалуйста, корректный URL'
+                    }" />
+
+                <TextElement name="at-profile-link" label="Ваш профиль на Автор Тудей" input-type="url"
                     placeholder="https://author.today/u/..."
-                    before="для обратной связи и уточняющих вопросов, если они понадобятся" rules="required"
-                    :messages="{ required: 'Обязательное поле' }" />
+                    before="для обратной связи и уточняющих вопросов, если они понадобятся" :rules="['required', 'url']"
+                    :messages="{ 'required': 'Обязательное поле', 'url': 'Укажите, пожалуйста, корректный URL' }" />
+
                 <TextareaElement name="problem-description" label="Описание проблемы"
                     before="Пожалуйста, как можно подробней опишите ваш вопрос или проблему. Это поможет быстрее её решить"
                     :autogrow="false" :rows="3" rules="required"
                     :messages="{ required: 'Пожалуйста, заполните все обязательные поля' }" />
+
                 <MultifileElement name="multifile" label="Скриншот (jpg или png)"
                     before="Прикрепите скриншот, если это необходимо (до 10 файлов, макс. размер 30Мб)."
                     :file="{ rules: 'max:30720' }" accept=".jpg,.png" rules="required|max:10" />
-                <ButtonElement class="center-form-elements" name="submit-btn" :loading="false" :submits="true"
-                    description="<p>Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь c <a href='#'>политикой<br/> конфиденциальности</a></p>">
+
+                <ButtonElement class="center-form-elements submit-btn" name="submit-btn" :loading="false"
+                    :submits="true"
+                    description="<p>Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь c <a href='https://author.today/pages/confidental' target='_blank' rel='noopener noreferrer'>политикой<br /> конфиденциальности</a></p>">
                     Отправить
                 </ButtonElement>
             </Vueform>

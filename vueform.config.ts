@@ -10,5 +10,7 @@ export default defineConfig({
   locales: { ru },
   locale: "ru",
   classHelpers: true,
-  floatPlaceholders: false
+  floatPlaceholders: false,
+  // @ts-ignore
+  validateOn: ""
 });

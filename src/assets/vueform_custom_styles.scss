@@ -16,7 +16,7 @@
     --vf-border-color-input-danger: var(--vf-danger);
     --vf-border-color-input-focus: none;
     --vf-gutter: 25px;
-    --vf-px-input: 25px;
+    --vf-px-input: 20px;
     --vf-py-input: 13px;
     --vf-px-btn: 60px;
     --vf-py-btn: 1px;
@@ -57,4 +57,27 @@
     border-color: var(--vf-bg-btn);
     color: rgb(255, 255, 255);
     font-weight: 400;
+}
+
+.hide-select-before .vf-layout-inner-container .vf-layout-inner-wrapper-before {
+    display: none;
+}
+
+.submit-btn .vf-layout-inner-wrapper {
+    margin-bottom: 30px;
+}
+
+.submit-btn #submit-btn__description {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.55;
+
+    & a {
+        color: var(--decor-color-first);
+        border-bottom: 1px solid var(--decor-color-first);
+    }
+}
+
+#problem-description {
+    min-height: 100px;
 }
