@@ -193,9 +193,56 @@
         <strong>Внимание! Служба поддержки НЕ решает вопросы коммерческого<br />отдела!</strong>
       </p>
     </div>
-    <div class=" form-container">
+    <div class="form-container">
+      <form class="support-request-form">
+        <label class="support-request-form-label">
+          <p>Тема обращения</p>
+          <div class="select-wrapper"><select class="support-request-form-field">
+              <option value="Я автор. Техническая проблема">Я автор. Техническая проблема</option>"
+              <option value="Я читатель. Техническая проблема">Я читатель. Техническая проблема</option>"
+              <option value="Нарушение правил сайта" selected>Нарушение правил сайта</option>"
+              <option value="Проблема оплаты">Нарушение правил сайта</option>"
+              <option value="Пропал доступ к купленной книге">Пропал доступ к купленной книге</option>"
+              <option value="Не могу войти в аккаунт">Не могу войти в аккаунт</option>"
+              <option value="Мой аккаунт пустой">Мой аккаунт пустой</option>"
+              <option value="Предложение по работе сайта">Предложение по работе сайта</option>"
+              <option value="Другое">Другое</option>"
+            </select></div>
+        </label>
+        <label class="support-request-form-label with-description">
+          <p>Ссылка на проблему, если
+            нужна</p>
+          <p class="support-request-form-input-description">Проверьте ссылку. Чем она точнее, тем лучше</p><input
+            class="support-request-form-field with-description" type="url" placeholder="https://author.today/...">
+        </label>
 
-      Тут будет форма
+        <label class="support-request-form-label with-description">
+          <p>Ваш профиль на Автор Тудей</p>
+          <p class="support-request-form-input-description">Для обратной связи и уточняющих вопросов, если они
+            понадобятся
+          </p><input class="support-request-form-field" type="url" placeholder="https://author.today/u/...">
+        </label>
+
+        <label class="support-request-form-label with-description">
+          <p>Описание проблемы</p>
+          <p class="support-request-form-input-description">Пожалуйста, как можно подробней опишите ваш вопрос или
+            проблему. Это поможет быстрее её решить
+          </p><textarea class="support-request-form-field" name="" id="" cols="30" rows="10"></textarea>
+        </label>
+        <div><label class="support-request-form-label with-description file-input-wrapper">
+            <p>Скриншот (jpg или png)</p>
+            <p class="support-request-form-input-description">Прикрепите скриншот, если это необходимо (до 10 файлов,
+              макс. размер 30Мб).</p>
+            <div class="support-form-btn input-file-immitator">Загрузить файлы</div>
+            <input class="visually-hidden" type="file" accept=".jpg, .png" multiple>
+          </label></div>
+        <div class="center-text"><button class="support-form-btn" type="submit">Отправить</button>
+          <p class="policy-paragraf">Нажимая на кнопку, вы даете согласие на обработку персональных данных и
+            соглашаетесь c <a class='link-decor-color-first' href='https://author.today/pages/confidental'
+              target='_blank' rel='noopener noreferrer'>политикой<br />
+              конфиденциальности</a></p>
+        </div>
+      </form>
     </div>
   </section>
   <!-- ----------------- -->
@@ -802,6 +849,120 @@ strong {
   text-align: center;
 }
 
+/* ---- Support request form styles */
+.support-request-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.support-request-form-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 5px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 31px;
+
+  &.with-description>p {
+    margin-bottom: 35px;
+  }
+
+  &.file-input-wrapper {
+    align-items: flex-start;
+  }
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  &::before {
+    content: "";
+
+    width: 20px;
+    height: 59px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+  }
+
+  &::after {
+    content: "";
+    display: flex;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 5px 0 5px;
+    border-color: var(--bg-color-black) transparent transparent transparent;
+    position: absolute;
+    right: 20px;
+    top: 29px;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+}
+
+.support-request-form-input-description {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--text-color-placeholder);
+}
+
+.support-request-form-field {
+  display: block;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.33;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 0;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-color-placeholder);
+    font-family: "TildaSans", Arial, sans-serif;
+  }
+}
+
+.support-form-btn {
+  padding: 20px 60px;
+  border: none;
+  color: var(--text-color-first);
+  background-color: var(--decor-color-first);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.input-file-immitator {
+  font-weight: 400;
+  line-height: 38px;
+  padding: 0 15px;
+}
+
+.policy-paragraf {
+  margin-top: 30px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
 /* 'No wait instruction' section styles */
 .no-wait-section {
   padding: 90px 0;
@@ -936,6 +1097,128 @@ strong {
 
 .section-immitation {
   padding: 60px 0;
+}
+
+.question-data-list-item {
+  width: 100%;
+  border-bottom: 1px solid rgb(238, 238, 238);
+
+  &:first-child {
+    border-top: 1px solid rgb(238, 238, 238);
+  }
+}
+
+.question-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 23px 50px 23px 0;
+  border: none;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &:hover .close-question-icon-wrapper {
+    background-color: var(--decor-color-second);
+  }
+
+  &.is-opened {
+    & .close-question-icon-wrapper {
+      transform: rotate(-45deg);
+    }
+
+    &+.question-answer {
+      max-height: 1000px;
+      margin-bottom: 38px;
+    }
+  }
+}
+
+.question {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.close-question-icon-wrapper {
+  position: relative;
+  left: 50px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: transform var(--transition);
+}
+
+.question-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition), margin var(--transition);
+}
+
+.question-answer-header {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+  color: var(--decor-color-first);
+}
+
+.question-reasons-list-item {
+  margin-left: 20px;
+}
+
+.lifehack-list-item {
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.faq-image-container {
+  width: 100%;
+  padding: 75px 0;
+  text-align: center;
+
+  & img {
+    display: inline-block;
+  }
+}
+
+.section-immitation {
+  padding: 60px 0;
+}
+
+.paragraf-with-margin {
+  margin-bottom: 30px;
+}
+
+.question-reasons-list {
+  margin-bottom: 10px;
+  list-style: disc inside;
+}
+
+.important {
+  color: var(--decor-color-first);
+}
+
+.link-decor-color-first {
+  color: var(--decor-color-first);
+  border-bottom: 1px solid var(--decor-color-first);
+}
+
+.ordered-list-with-links {
+  list-style: inside;
+  list-style-type: decimal;
+  color: var(--decor-color-first);
+
+  &.no-decor-color {
+    color: black;
+  }
 }
 
 /* Footer styles */
