@@ -326,7 +326,54 @@
     </div>
   </section>
   <!-- ----------------- -->
-  Тут faq секция будет
+  <section class="faq-section">
+    <div class="main-container faq-section-text-wrapper">
+      <ul>
+        <QuestionWithAnswer v-for="(orgQuestion, orgQuestionIdx) in orgQuestionsData"
+          :key="orgQuestion + orgQuestionIdx">
+          <template v-slot:question>
+            {{ orgQuestion.question }}
+          </template>
+          <template v-slot:answer>
+            <div v-html="orgQuestion.answerHTML"></div>
+          </template>
+        </QuestionWithAnswer>
+      </ul>
+
+      <div class="faq-image-container"><img src="/public/faq-section-image.jpg" width="500px" height="500px"
+          alt="декоративное изображение раздела FAQ"></div>
+
+    </div>
+
+    <div class="main-container section-immitation" id="faq">
+      <h2 class="support-page-section-header faq-section-section-header">Часто задаваемые вопросы</h2>
+      <p class="center-text">Ниже собран список вопросов, с которыми мы встречаемся чаще всего. Это общие вопросы,
+        не требующие индивидуального<br /> рассмотрения проблемы и плотного общения с сотрудником службы поддержки,
+        проверки
+        вашего профиля и других моментов.<br />
+        <strong class="important">Пожалуйста, загляните в этот список прежде, чем написать нам. Возможно, ваш вопрос уже
+          решен.</strong>
+      </p>
+    </div>
+
+    <div class="main-container faq-section-text-wrapper">
+      <ul>
+        <QuestionWithAnswer v-for="(faqQuestion, faqQuestionIdx) in faqQuestionsData"
+          :key="faqQuestion + faqQuestionIdx">
+          <template v-slot:question>
+            {{ faqQuestion.question }}
+          </template>
+          <template v-slot:answer>
+            <div v-html="faqQuestion.answerHTML"></div>
+          </template>
+        </QuestionWithAnswer>
+      </ul>
+
+    </div>
+  </section>
+
+
+
   <!-- ----------------- -->
   <footer>
     <div class="main-container">
@@ -344,7 +391,10 @@
 
 <script setup>
 import ScrollToTopButton from '@/components/ScrollToTopButton.vue'
-import CloseQuestionIcon from "@/components/icons/CloseQuestionIcon.vue"
+import QuestionWithAnswer from '@/components/QuestionWithAnswer.vue'
+
+import faqQuestionsData from "@/data/faqQuestionsData.json"
+import orgQuestionsData from "@/data/orgQuestionsData.json"
 
 import { ref, onMounted, onUnmounted } from 'vue';
 
@@ -580,7 +630,7 @@ nav {
 
 /* 'Commercial author' section styles */
 .commercial-author-section {
-  padding: 138px 0 10px;
+  padding-top: 98px;
 }
 
 .commercial-author-content-wrapper {
@@ -792,6 +842,7 @@ strong {
 
 .instruction-text {
   margin-bottom: 90px;
+  line-height: 27px;
 }
 
 .link-to-faq {
@@ -852,6 +903,39 @@ strong {
     content: " →";
 
   }
+}
+
+/* 'FAQ' section styles */
+.faq-section {
+  padding: 90px 0;
+}
+
+.faq-section-text-wrapper {
+  width: 760px;
+  padding: 0;
+}
+
+.faq-section-section-header {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.question-data-list {
+  width: 100%;
+}
+
+.faq-image-container {
+  width: 100%;
+  padding: 165px 0 75px;
+  text-align: center;
+
+  & img {
+    display: inline-block;
+  }
+}
+
+.section-immitation {
+  padding: 60px 0;
 }
 
 /* Footer styles */
