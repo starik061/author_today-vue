@@ -377,7 +377,8 @@
     <div class="main-container faq-section-text-wrapper">
       <ul>
         <QuestionWithAnswer v-for="(orgQuestion, orgQuestionIdx) in orgQuestionsData"
-          :key="orgQuestion + orgQuestionIdx">
+          :key="orgQuestion + orgQuestionIdx" :isAnswerOpened="orgQuestionsState[orgQuestionIdx]"
+          @openAnswer="handleOpenAnswer($event, orgQuestionIdx, 'org')" questionType="org">
           <template v-slot:question>
             {{ orgQuestion.question }}
           </template>
@@ -406,7 +407,8 @@
     <div class="main-container faq-section-text-wrapper">
       <ul>
         <QuestionWithAnswer v-for="(faqQuestion, faqQuestionIdx) in faqQuestionsData"
-          :key="faqQuestion + faqQuestionIdx">
+          :key="faqQuestion + faqQuestionIdx" :isAnswerOpened="faqQuestionsState[faqQuestionIdx]"
+          @openAnswer="handleOpenAnswer($event, faqQuestionIdx, 'faq')" questionType="faq">
           <template v-slot:question>
             {{ faqQuestion.question }}
           </template>
@@ -418,9 +420,6 @@
 
     </div>
   </section>
-
-
-
   <!-- ----------------- -->
   <footer>
     <div class="main-container">
@@ -432,8 +431,6 @@
   </footer>
   <!-- ----------------- -->
   <ScrollToTopButton v-if="!isOpaque" @click="scrollToTop" />
-
-
 </template>
 
 <script setup>
@@ -443,7 +440,7 @@ import QuestionWithAnswer from '@/components/QuestionWithAnswer.vue'
 import faqQuestionsData from "@/data/faqQuestionsData.json"
 import orgQuestionsData from "@/data/orgQuestionsData.json"
 
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
 //- В этой части кода мы определяем будет ли цвет фона хэдэра иметь прозрачность или нет. 
 const isOpaque = ref(true);
@@ -471,6 +468,40 @@ onUnmounted(() => {
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
+
+//- В этой части кода задается состояние и логика открытия ответа при клике на вопрос.
+const orgQuestionsState = reactive([]); // эта переменная нужна для изменения цвета иконки крестика при ховере на кнопку вопроса (в разделе организационных вопросов).
+orgQuestionsState.length = orgQuestionsData.length;
+orgQuestionsState.fill(false);
+
+const faqQuestionsState = reactive([]); // эта переменная нужна для изменения цвета иконки крестика при ховере на кнопку вопроса (в разделе часто задаваемых вопросов).
+faqQuestionsState.length = orgQuestionsData.length;
+faqQuestionsState.fill(false);
+
+function toggleAnimation(index, type) {
+  const element = document.querySelectorAll(`.question-answer.${type}`)[index];
+  if (element.style.height != 0 && element.style.height != "0px") {
+    element.style.height = 0;
+  } else {
+    element.style.height = element.scrollHeight + 'px';
+  }
+}
+
+const handleOpenAnswer = (isPreviouslyOpened, index, type) => {
+  toggleAnimation(index, type);
+
+  if (type == "org") {
+    orgQuestionsState.fill(false);
+    if (!isPreviouslyOpened) { orgQuestionsState[index] = true; }
+  }
+  if (type == "faq") {
+    faqQuestionsState.fill(false);
+    if (!isPreviouslyOpened) { faqQuestionsState[index] = true; }
+  }
+
+}
+//-----------------------------------------------------------------
+
 </script>
 
 <style>
@@ -1129,7 +1160,7 @@ strong {
     }
 
     &+.question-answer {
-      max-height: 1000px;
+      height: auto;
       margin-bottom: 38px;
     }
   }
@@ -1156,9 +1187,9 @@ strong {
 }
 
 .question-answer {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height var(--transition), margin var(--transition);
+  transition: height var(--transition), margin var(--transition);
 }
 
 .question-answer-header {
