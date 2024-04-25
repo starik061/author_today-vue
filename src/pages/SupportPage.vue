@@ -194,10 +194,11 @@
       </p>
     </div>
     <div class="form-container">
-      <form class="support-request-form">
+      <form class="support-request-form" @submit.prevent="validateSupportRequestForm" novalidate>
         <label class="support-request-form-label">
           <p>Тема обращения</p>
-          <div class="select-wrapper"><select class="support-request-form-field">
+          <div class="select-wrapper">
+            <select class="support-request-form-field" name="problemName">
               <option value="Я автор. Техническая проблема">Я автор. Техническая проблема</option>"
               <option value="Я читатель. Техническая проблема">Я читатель. Техническая проблема</option>"
               <option value="Нарушение правил сайта" selected>Нарушение правил сайта</option>"
@@ -207,35 +208,59 @@
               <option value="Мой аккаунт пустой">Мой аккаунт пустой</option>"
               <option value="Предложение по работе сайта">Предложение по работе сайта</option>"
               <option value="Другое">Другое</option>"
-            </select></div>
+            </select>
+          </div>
         </label>
         <label class="support-request-form-label with-description">
           <p>Ссылка на проблему, если
             нужна</p>
-          <p class="support-request-form-input-description">Проверьте ссылку. Чем она точнее, тем лучше</p><input
-            class="support-request-form-field with-description" type="url" placeholder="https://author.today/...">
+          <p class="support-request-form-input-description">Проверьте ссылку. Чем она точнее, тем лучше</p>
+          <input class="support-request-form-field with-description" name="problemLink" type="url"
+            placeholder="https://author.today/..." @input="resetInputError('problemLinkFormatError')">
         </label>
+        <p class="input-error-message" v-if="supportRequestFormErrors.problemLinkFormatError">Укажите, пожалуйста,
+          корректный URL</p>
 
         <label class="support-request-form-label with-description">
           <p>Ваш профиль на Автор Тудей</p>
           <p class="support-request-form-input-description">Для обратной связи и уточняющих вопросов, если они
             понадобятся
-          </p><input class="support-request-form-field" type="url" placeholder="https://author.today/u/...">
+          </p>
+          <input class="support-request-form-field" name="profileLink" type="url"
+            placeholder="https://author.today/u/..."
+            @input="resetInputError('profileLinkFormatError', 'requiredProfileLinkError')">
         </label>
+        <p class="input-error-message" v-if="supportRequestFormErrors.requiredProfileLinkError">
+          Пожалуйста, заполните все обязательные поля</p>
+        <p class="input-error-message" v-if="supportRequestFormErrors.profileLinkFormatError">
+          Укажите, пожалуйста,
+          корректный URL</p>
 
         <label class="support-request-form-label with-description">
           <p>Описание проблемы</p>
           <p class="support-request-form-input-description">Пожалуйста, как можно подробней опишите ваш вопрос или
             проблему. Это поможет быстрее её решить
-          </p><textarea class="support-request-form-field" name="" id="" cols="30" rows="10"></textarea>
+          </p>
+          <textarea class="support-request-form-field" name="problemDescription" cols="30" rows="10"
+            @input="resetInputError(undefined, 'requiredDescriptionError')"></textarea>
         </label>
+        <p class="input-error-message" v-if="supportRequestFormErrors.requiredDescriptionError">
+          Пожалуйста, заполните все обязательные поля</p>
+
         <div><label class="support-request-form-label with-description file-input-wrapper">
             <p>Скриншот (jpg или png)</p>
             <p class="support-request-form-input-description">Прикрепите скриншот, если это необходимо (до 10 файлов,
               макс. размер 30Мб).</p>
             <div class="support-form-btn input-file-immitator">Загрузить файлы</div>
-            <input class="visually-hidden" type="file" accept=".jpg, .png" multiple>
+            <input class="visually-hidden" name="problemImages" type="file" accept=".jpg, .png" multiple
+              @change="validateSupportRequestFiles">
           </label></div>
+        <p class="input-error-message" v-if="supportRequestFormErrors.fileSizeError">
+          Размер одного или нескольких файлов превышает 30 Мб</p>
+        <p class="input-error-message" v-if="supportRequestFormErrors.fileQuantityError">
+          Количество загружаемых изображений превышает допустимое число (10 шт.)</p>
+
+        <div class="form-error-message" v-if="isFormErrorMessageshown">Пожалуйста, заполните все обязательные поля</div>
         <div class="center-text"><button class="support-form-btn" type="submit">Отправить</button>
           <p class="policy-paragraf">Нажимая на кнопку, вы даете согласие на обработку персональных данных и
             соглашаетесь c <a class='link-decor-color-first' href='https://author.today/pages/confidental'
@@ -478,8 +503,7 @@ const faqQuestionsState = reactive([]); // эта переменная нужн�
 faqQuestionsState.length = orgQuestionsData.length;
 faqQuestionsState.fill(false);
 
-function toggleAnimation(index, type) {
-  // ___________
+function toggleHeight(index, type) {
   const element = document.querySelectorAll(`.question-answer.${type}`)[index];
   if (element.style.height != 0 && element.style.height != "0px") {
     element.style.height = 0;
@@ -492,7 +516,7 @@ function toggleAnimation(index, type) {
 }
 
 const handleOpenAnswer = (isPreviouslyOpened, index, type) => {
-  toggleAnimation(index, type);
+  toggleHeight(index, type);
 
   if (type == "org") {
     orgQuestionsState.fill(false);
@@ -502,10 +526,111 @@ const handleOpenAnswer = (isPreviouslyOpened, index, type) => {
     faqQuestionsState.fill(false);
     if (!isPreviouslyOpened) { faqQuestionsState[index] = true; }
   }
-
 }
 //-----------------------------------------------------------------
+//- В этой части кода валидируется и обрабатываются данные формы отправки запроса в поддержку.
+let isFormErrorMessageshown = ref(false);
 
+let supportRequestFormErrors = reactive({
+  fileSizeError: false,
+  fileQuantityError: false,
+  requiredProfileLinkError: false,
+  profileLinkFormatError: false,
+  problemLinkFormatError: false,
+  requiredDescriptionError: false
+})
+
+const resetInputError = (formatError, errorOfRequired) => {
+  if (formatError) {
+    supportRequestFormErrors[formatError] = false;
+    console.log(supportRequestFormErrors[formatError])
+  }
+  if (errorOfRequired) {
+    supportRequestFormErrors[errorOfRequired] = false;
+  }
+
+  isFormErrorMessageshown.value = false;
+};
+
+const validateUrlInput = (inputValue, isRequired = false) => {
+  supportRequestFormErrors.requiredProfileLinkError = false;
+  supportRequestFormErrors.profileLinkFormatError = false;
+  supportRequestFormErrors.problemLinkFormatError = false;
+
+  // Регулярное выражение для проверки URL
+  const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
+  console.log(inputValue)
+  // Проверяем, что обязательное поле не пустое
+  if (isRequired) {
+    if (!inputValue) {
+      supportRequestFormErrors.requiredProfileLinkError = true;
+      return
+    }
+  }
+  // Проверяем, соответствует ли ввод шаблону URL
+  if (!urlPattern.test(inputValue)) {
+    if (isRequired) {
+      supportRequestFormErrors.profileLinkFormatError = true;
+    }
+    else {
+      supportRequestFormErrors.problemLinkFormatError = true;
+    }
+  }
+}
+
+const validateProblemDescription = (value) => {
+  supportRequestFormErrors.requiredDescriptionError = false;
+  if (!value) {
+    supportRequestFormErrors.requiredDescriptionError = true;
+  }
+}
+
+const validateSupportRequestFiles = (event) => {
+  supportRequestFormErrors.fileQuantityError = false;
+  supportRequestFormErrors.fileSizeError = false;
+  const files = event.target.files;
+
+  if (files.length > 10) {
+    supportRequestFormErrors.fileQuantityError = true;
+    return
+  }
+  for (const file of files) {
+    if (file.size > 30 * 1024 * 1024) {
+      supportRequestFormErrors.fileSizeError = true;
+    }
+  }
+}
+
+const validateSupportRequestForm = (event) => {
+  isFormErrorMessageshown.value = false;
+  supportRequestFormErrors.requiredProfileLinkError = false;
+  supportRequestFormErrors.profileLinkFormatError = false;
+  supportRequestFormErrors.problemLinkFormatError = false;
+  supportRequestFormErrors.requiredDescriptionError = false;
+
+  const formData = new FormData(event.target)
+
+  const dataObject = {};
+  for (let [key, value] of formData.entries()) {
+    dataObject[key] = value;
+  }
+
+  validateUrlInput(dataObject.problemLink);
+  validateUrlInput(dataObject.profileLink, true);
+  validateProblemDescription(dataObject.problemDescription);
+
+  const errorsValuesArray = Object.values(supportRequestFormErrors);
+  if (errorsValuesArray.includes(true)) {
+    console.table(supportRequestFormErrors)
+    console.log("Форма не прошла валидацию");
+    isFormErrorMessageshown.value = true;
+    return
+  }
+
+  console.log("Валидация успешна");
+  // fethc("POST", ...formData...)
+}
+//-----------------------------------------------------------------
 </script>
 
 <style>
@@ -973,6 +1098,25 @@ strong {
     color: var(--text-color-placeholder);
     font-family: "TildaSans", Arial, sans-serif;
   }
+}
+
+.form-error-message {
+  margin: 10px 0 40px 0;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 31px;
+  color: var(--text-color-first);
+  text-align: center;
+  background-color: var(--form-error-color);
+}
+
+.input-error-message {
+  position: relative;
+  top: -12px;
+  color: var(--form-error-color);
+  font-size: 13px;
+
 }
 
 .support-form-btn {
