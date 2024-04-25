@@ -479,11 +479,15 @@ faqQuestionsState.length = orgQuestionsData.length;
 faqQuestionsState.fill(false);
 
 function toggleAnimation(index, type) {
+  // ___________
   const element = document.querySelectorAll(`.question-answer.${type}`)[index];
   if (element.style.height != 0 && element.style.height != "0px") {
     element.style.height = 0;
   } else {
     element.style.height = element.scrollHeight + 'px';
+    // Обнуляем высоту всех ответов
+    const answersArray = document.querySelectorAll(`.question-answer.${type}`);
+    answersArray.forEach((el) => { if (el !== element) { el.style.height = 0 } });
   }
 }
 
@@ -1188,6 +1192,7 @@ strong {
 
 .question-answer {
   height: 0;
+  margin-bottom: 0;
   overflow: hidden;
   transition: height var(--transition), margin var(--transition);
 }
