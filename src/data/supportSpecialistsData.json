@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Ольга",
+    "role": "Тех.поддержка и модерация",
+    "working_hours": "Время работы: 08:00 - 20:00 (мск)",
+    "working_shedule": "Выходные: ПТ, СБ",
+    "about_info": "См. информацию «О себе»",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#633210"
+  },
+  {
+    "name": "Юми",
+    "role": "Тех.поддержка и модерация",
+    "working_hours": "Время работы: 10:00 - 22:00 (мск)",
+    "working_shedule": "График работы 2/2.",
+    "about_info": "См. информацию «О себе»",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#450598"
+  },
+  {
+    "name": "Иннокентий",
+    "role": "Тех.поддержка и модерация",
+    "working_hours": "Время работы: 10:00 - 22:00 (мск)",
+    "working_shedule": "График работы 2/2.",
+    "about_info": "См. информацию «О себе»",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#771836"
+  },
+  {
+    "name": "Юлия",
+    "role": "Тех.поддержка и модерация",
+    "working_hours": "Время работы: 08:00 - 16:00 (мск)",
+    "working_shedule": "Выходные: ВС, ПН",
+    "about_info": "См. информацию «О себе»",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#1470410"
+  },
+  {
+    "name": "Марина Д.",
+    "role": "Вопросы по рекламе, акциям и настройке Яндекс.Метрики",
+    "working_hours": "Время ответа на ЛС с 17-21:00 (мск)",
+    "working_shedule": "Выходные: СБ, ВС",
+    "about_info": "",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#209324"
+  },
+  {
+    "name": "Дмитрий Малкин",
+    "role": "Вопросы поддержки авторов сайта (творческая акклиматизация на АТ)",
+    "working_hours": "Время ответа на ЛС с 10-19:00 (мск)",
+    "working_shedule": "Выходные: СБ, ВС",
+    "about_info": "",
+    "link": "https://author.today/Account/Login?ReturnUrl=%2Fpm#1828998"
+  }
+]

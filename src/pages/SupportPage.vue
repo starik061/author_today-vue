@@ -69,7 +69,6 @@
             которых они работают, а также ЧаВо.</p>
         </div>
       </div>
-
       <b class="about-us-appeal"><span>Главное, о чем мы просим помнить — не важно, к кому именно вы обращаетесь на
           сайте,
           —
@@ -215,8 +214,9 @@
           <p>Ссылка на проблему, если
             нужна</p>
           <p class="support-request-form-input-description">Проверьте ссылку. Чем она точнее, тем лучше</p>
-          <input class="support-request-form-field with-description" name="problemLink" type="url"
-            placeholder="https://author.today/..." @input="resetInputError('problemLinkFormatError')">
+          <input class="support-request-form-field with-description"
+            :class="{ 'error-border-color': supportRequestFormErrors.problemLinkFormatError }" name="problemLink"
+            type="url" placeholder="https://author.today/..." @input="resetInputError('problemLinkFormatError')">
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.problemLinkFormatError">Укажите, пожалуйста,
           корректный URL</p>
@@ -226,8 +226,9 @@
           <p class="support-request-form-input-description">Для обратной связи и уточняющих вопросов, если они
             понадобятся
           </p>
-          <input class="support-request-form-field" name="profileLink" type="url"
-            placeholder="https://author.today/u/..."
+          <input class="support-request-form-field"
+            :class="{ 'error-border-color': supportRequestFormErrors.profileLinkFormatError || supportRequestFormErrors.requiredProfileLinkError }"
+            name="profileLink" type="url" placeholder="https://author.today/u/..."
             @input="resetInputError('profileLinkFormatError', 'requiredProfileLinkError')">
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.requiredProfileLinkError">
@@ -241,8 +242,9 @@
           <p class="support-request-form-input-description">Пожалуйста, как можно подробней опишите ваш вопрос или
             проблему. Это поможет быстрее её решить
           </p>
-          <textarea class="support-request-form-field" name="problemDescription" cols="30" rows="10"
-            @input="resetInputError(undefined, 'requiredDescriptionError')"></textarea>
+          <textarea class="support-request-form-field"
+            :class="{ 'error-border-color': supportRequestFormErrors.requiredDescriptionError }"
+            name="problemDescription" @input="resetInputError(undefined, 'requiredDescriptionError')"></textarea>
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.requiredDescriptionError">
           Пожалуйста, заполните все обязательные поля</p>
@@ -317,79 +319,17 @@
         Возможно, там уже есть нужный вам ответ
       </p>
       <ul class="specialist-list">
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#633210"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Ольга</h3>
-            <p class="specialist-job-title">Тех.поддержка и модерация</p>
+        <li class="specialist-list-item"
+          v-for="(supportSpecialistInfo, supportSpecialistInfoIdx) of supportSpecialistsData"
+          :key="supportSpecialistInfo + supportSpecialistInfoIdx">
+          <a class="specialist-list-item-link" :href="supportSpecialistInfo.link" target="_blank"
+            rel="noopener noreferrer">
+            <h3 class="specialist-name">{{ supportSpecialistInfo.name }}</h3>
+            <p class="specialist-job-title">{{ supportSpecialistInfo.role }}</p>
             <ul>
-              <li>Время работы: 08:00 - 20:00 (мск)</li>
-              <li>Выходные: ПТ, СБ</li>
-              <li>См. информацию «О себе»</li>
-              <p class="write-to-private">Написать ЛС</p>
-            </ul>
-          </a>
-        </li>
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#450598"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Юми</h3>
-            <p class="specialist-job-title">Тех.поддержка и модерация</p>
-            <ul>
-              <li>Время работы: 10:00 - 22:00 (мск)</li>
-              <li>График работы 2/2.</li>
-              <li>См. информацию «О себе»</li>
-              <p class="write-to-private">Написать ЛС</p>
-            </ul>
-          </a>
-        </li>
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#771836"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Иннокентий</h3>
-            <p class="specialist-job-title">Тех.поддержка и модерация</p>
-            <ul>
-              <li>Время работы: 10:00 - 22:00 (мск)</li>
-              <li>График работы 2/2.</li>
-              <li>См. информацию «О себе»</li>
-              <p class="write-to-private">Написать ЛС</p>
-            </ul>
-          </a>
-        </li>
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#1470410"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Юлия</h3>
-            <p class="specialist-job-title">Тех.поддержка и модерация</p>
-            <ul>
-              <li>Время работы: 08:00 - 16:00 (мск)</li>
-              <li>Выходные: ВС, ПН</li>
-              <li>См. информацию «О себе»</li>
-              <p class="write-to-private">Написать ЛС</p>
-            </ul>
-          </a>
-        </li>
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#209324"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Марина Д.</h3>
-            <p class="specialist-job-title">Вопросы по рекламе, акциям и настройке Яндекс.Метрики</p>
-            <ul>
-              <li>Время ответа на ЛС с 17-21:00 (мск)</li>
-              <li>Выходные: СБ, ВС</li>
-              <p class="write-to-private">Написать ЛС</p>
-            </ul>
-          </a>
-        </li>
-        <li class="specialist-list-item">
-          <a class="specialist-list-item-link" href="https://author.today/Account/Login?ReturnUrl=%2Fpm#1828998"
-            target="_blank" rel="noopener noreferrer">
-            <h3 class="specialist-name">Дмитрий Малкин</h3>
-            <p class="specialist-job-title">Вопросы поддержки авторов сайта (творческая акклиматизация на
-              АТ)</p>
-            <ul>
-              <li>Время ответа на ЛС с 10-19:00 (мск)</li>
-              <li>Выходные: СБ, ВС</li>
+              <li>{{ supportSpecialistInfo.working_hours }}</li>
+              <li>{{ supportSpecialistInfo.working_shedule }}</li>
+              <li v-if="supportSpecialistInfo.about_info">См. информацию «О себе»</li>
               <p class="write-to-private">Написать ЛС</p>
             </ul>
           </a>
@@ -415,7 +355,6 @@
 
       <div class="faq-image-container"><img src="/public/faq-section-image.jpg" width="500px" height="500px"
           alt="декоративное изображение раздела FAQ"></div>
-
     </div>
 
     <div class="main-container section-immitation" id="faq">
@@ -442,7 +381,6 @@
           </template>
         </QuestionWithAnswer>
       </ul>
-
     </div>
   </section>
   <!-- ----------------- -->
@@ -464,6 +402,7 @@ import QuestionWithAnswer from '@/components/QuestionWithAnswer.vue'
 
 import faqQuestionsData from "@/data/faqQuestionsData.json"
 import orgQuestionsData from "@/data/orgQuestionsData.json"
+import supportSpecialistsData from "@/data/supportSpecialistsData.json"
 
 import { ref, reactive, onMounted, onUnmounted } from 'vue';
 
@@ -480,6 +419,7 @@ const handleScroll = () => {
     isOpaque.value = headerBottom <= aboutUsTop;
   }
 };
+
 onMounted(() => {
   aboutUsSection.value = document.querySelector('.about-us-section');
   window.addEventListener('scroll', handleScroll);
@@ -635,7 +575,6 @@ const validateSupportRequestForm = (event) => {
 
 <style>
 /* Header styles */
-
 header {
   position: fixed;
   top: 0;
@@ -647,7 +586,6 @@ header {
   width: 100%;
   height: 80px;
   background-color: var(--bg-color-black);
-
 }
 
 nav {
@@ -658,7 +596,6 @@ nav {
 }
 
 .logo {
-
   display: block;
   width: 180px;
   height: auto;
@@ -732,7 +669,6 @@ nav {
   font-weight: 300;
   line-height: 28px;
   color: var(--text-color-second);
-
 }
 
 .main-banner__link-wrapper {
@@ -743,7 +679,6 @@ nav {
 
 .main-banner__link {
   display: flex;
-
   align-items: center;
   height: 60px;
   padding: 0 62px;
@@ -764,7 +699,7 @@ nav {
 }
 
 .about-us-section-header {
-  margin-bottom: 45px;
+  margin-bottom: 42px;
 }
 
 .paragraf {
@@ -889,7 +824,6 @@ nav {
   height: 8vw;
   background-color: var(--bg-color-grey);
 
-
   &::after {
     content: "";
     position: absolute;
@@ -934,7 +868,6 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-basis: 110px;
   flex-shrink: 0;
   height: 100%;
@@ -963,7 +896,6 @@ nav {
   width: 100%;
   height: 8vw;
   background-color: rgb(255, 255, 255);
-
 
   &::after {
     content: "";
@@ -997,7 +929,7 @@ strong {
 }
 
 .support-description-text {
-  margin-bottom: 90px;
+  margin-bottom: 110px;
 }
 
 .form-container {
@@ -1023,13 +955,13 @@ strong {
   justify-content: flex-start;
   align-items: stretch;
   gap: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   font-size: 20px;
   font-weight: 300;
   line-height: 31px;
 
   &.with-description>p {
-    margin-bottom: 35px;
+    margin-bottom: 36px;
   }
 
   &.file-input-wrapper {
@@ -1045,9 +977,8 @@ strong {
 
   &::before {
     content: "";
-
     width: 20px;
-    height: 59px;
+    height: 58px;
     position: absolute;
     right: 1px;
     top: 1px;
@@ -1076,29 +1007,41 @@ strong {
 
 .support-request-form-input-description {
   position: absolute;
-  top: 35px;
+  top: 36px;
   left: 0;
   font-size: 14px;
   font-weight: 300;
   line-height: 1.55;
   color: var(--text-color-placeholder);
+  opacity: 0.8;
 }
 
 .support-request-form-field {
   display: block;
-  padding: 20px;
+  height: 60px;
+  padding: 0 20px;
   font-size: 16px;
+  font-family: "TildaSans", Arial, sans-serif;
   font-weight: 400;
-  line-height: 1.33;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 0;
   outline: none;
 
   &::placeholder {
     color: var(--text-color-placeholder);
-    font-family: "TildaSans", Arial, sans-serif;
+    opacity: 0.55;
   }
 }
+
+select.support-request-form-field {
+  padding-left: 16px;
+}
+
+textarea.support-request-form-field {
+  height: 102px;
+  padding: 20px 20px 0;
+}
+
 
 .form-error-message {
   margin: 10px 0 40px 0;
@@ -1113,10 +1056,13 @@ strong {
 
 .input-error-message {
   position: relative;
-  top: -12px;
+  top: -20px;
   color: var(--form-error-color);
   font-size: 13px;
+}
 
+.error-border-color {
+  border-color: var(--form-error-color);
 }
 
 .support-form-btn {
@@ -1132,7 +1078,7 @@ strong {
 .input-file-immitator {
   font-weight: 400;
   line-height: 38px;
-  padding: 0 15px;
+  padding: 0 20px;
 }
 
 .policy-paragraf {
@@ -1151,7 +1097,7 @@ strong {
   max-width: 880px;
   margin: 0 auto;
   padding: 60px;
-  background-color: var(--bg-color-grey);
+  background-color: var(--bg-color-no-wait-section);
 }
 
 .no-wait-appeal {
@@ -1163,7 +1109,7 @@ strong {
 }
 
 .no-wait-instruction-list {
-  margin-left: 10px;
+  margin-left: 20px;
   margin-bottom: 10px;
 }
 
@@ -1350,7 +1296,7 @@ strong {
 }
 
 .question-reasons-list-item {
-  margin-left: 20px;
+  margin-left: 2px;
 }
 
 .lifehack-list-item {
