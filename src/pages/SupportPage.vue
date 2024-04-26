@@ -492,30 +492,34 @@ const resetInputError = (formatError, errorOfRequired) => {
   isFormErrorMessageshown.value = false;
 };
 
-const validateUrlInput = (inputValue, isRequired = false) => {
-  supportRequestFormErrors.requiredProfileLinkError = false;
-  supportRequestFormErrors.profileLinkFormatError = false;
-  supportRequestFormErrors.problemLinkFormatError = false;
+const validateUrlField = (fieldParams) => {
+  if (fieldParams.required) {
+    if (!fieldParams.value) {
+      supportRequestFormErrors[fieldParams.requiredErrorName] = true;
+      supportRequestFormErrors[fieldParams.formatRequiredErrorName] = false;
+    } else if (fieldParams.formatRequired) {
+      supportRequestFormErrors[fieldParams.formatRequiredErrorName] = false;
 
-  // Регулярное выражение для проверки URL
-  const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
-  console.log(inputValue)
-  // Проверяем, что обязательное поле не пустое
-  if (isRequired) {
-    if (!inputValue) {
-      supportRequestFormErrors.requiredProfileLinkError = true;
-      return
+      // Регулярное выражение для проверки URL
+      const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
+
+      // Проверяем, соответствует ли ввод шаблону URL
+      if (!urlPattern.test(fieldParams.value)) {
+        supportRequestFormErrors[fieldParams.formatRequiredErrorName] = true;
+      }
+    }
+  } else if (fieldParams.value) {
+
+    // Регулярное выражение для проверки URL
+    const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
+
+    // Проверяем, соответствует ли ввод шаблону URL
+    if (!urlPattern.test(fieldParams.value)) {
+      supportRequestFormErrors[fieldParams.formatRequiredErrorName] = true;
     }
   }
-  // Проверяем, соответствует ли ввод шаблону URL
-  if (!urlPattern.test(inputValue)) {
-    if (isRequired) {
-      supportRequestFormErrors.profileLinkFormatError = true;
-    }
-    else {
-      supportRequestFormErrors.problemLinkFormatError = true;
-    }
-  }
+
+
 }
 
 const validateProblemDescription = (value) => {
@@ -555,9 +559,16 @@ const validateSupportRequestForm = (event) => {
     dataObject[key] = value;
   }
 
-  validateUrlInput(dataObject.problemLink);
-  validateUrlInput(dataObject.profileLink, true);
-  validateProblemDescription(dataObject.problemDescription);
+  validateUrlField({ required: false, formatRequired: true, formatRequiredErrorName: "problemLinkFormatError", value: dataObject.problemLink })// Валидация ссылки на проблему
+
+  validateUrlField({ required: true, requiredErrorName: "requiredProfileLinkError", formatRequired: true, formatRequiredErrorName: "profileLinkFormatError", value: dataObject.profileLink })// Валидация ссылки на профиль
+
+  validateProblemDescription(dataObject.problemDescription) // Валидация поляч описания проблемы
+  // validateTextField({ required: true, requiredErrorName: "requiredDescriptionError", value: dataObject.problemDescription })
+
+  // validateUrlInput(dataObject.problemLink);
+  // validateUrlInput(dataObject.profileLink, true);
+  // validateProblemDescription(dataObject.problemDescription);
 
   const errorsValuesArray = Object.values(supportRequestFormErrors);
   if (errorsValuesArray.includes(true)) {
@@ -568,6 +579,7 @@ const validateSupportRequestForm = (event) => {
   }
 
   console.log("Валидация успешна");
+  alert("Палетела малышка!!!!")
   // fethc("POST", ...formData...)
 }
 //-----------------------------------------------------------------
