@@ -579,7 +579,6 @@ const formData = reactive({
 })
 
 async function sendImagesToStorage(images) {
-
   try {
     const uploadPromises = images.map((image) => {
       const uniqueImageName = `${Date.now()}-${image.name}`;
@@ -610,19 +609,23 @@ async function sendsupportRequestDataToDB() {
   supportRequestFormErrors.problemLinkFormatError = false;
   supportRequestFormErrors.requiredDescriptionError = false;
 
-
   validateSupportRequestForm(formData);
 
   try {
-    if (supportRequestImages && supportRequestImages.length > 0) {
+    if (supportRequestImages && supportRequestImages?.length > 0) {
       await sendImagesToStorage(supportRequestImages);
     }
 
-    // Add a new document
+    // Добавляем новый докумен-запрос в поддержку в базу данных
     const supportRequestsRef = doc(collection(firestoreDatabase, "supportRequests"));
-
-    // later...
     await setDoc(supportRequestsRef, formData);
+
+    // Обнуляем все после успешной отправки
+    formData.problemName = "Нарушение правил сайта";
+    formData.problemLink = "";
+    formData.profileLink = "";
+    formData.problemDescription = "";
+    formData.imageLinks = [];
 
   } catch (error) {
     console.error("Ошибка при отправке данных запроса на поддержку: ", error);
