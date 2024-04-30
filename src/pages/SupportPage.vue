@@ -193,30 +193,32 @@
       </p>
     </div>
     <div class="form-container">
-      <form class="support-request-form" @submit.prevent="validateSupportRequestForm" novalidate>
+      <form class="support-request-form" @submit.prevent="sendsupportRequestDataToDB" novalidate>
         <label class="support-request-form-label">
           <p>Тема обращения</p>
           <div class="select-wrapper">
-            <select class="support-request-form-field" name="problemName">
-              <option value="Я автор. Техническая проблема">Я автор. Техническая проблема</option>"
-              <option value="Я читатель. Техническая проблема">Я читатель. Техническая проблема</option>"
-              <option value="Нарушение правил сайта" selected>Нарушение правил сайта</option>"
-              <option value="Проблема оплаты">Нарушение правил сайта</option>"
-              <option value="Пропал доступ к купленной книге">Пропал доступ к купленной книге</option>"
-              <option value="Не могу войти в аккаунт">Не могу войти в аккаунт</option>"
-              <option value="Мой аккаунт пустой">Мой аккаунт пустой</option>"
-              <option value="Предложение по работе сайта">Предложение по работе сайта</option>"
-              <option value="Другое">Другое</option>"
+            <select class="support-request-form-field" name="problemName" v-model="formData.problemName">
+              <option value="Я автор. Техническая проблема">Я автор. Техническая проблема</option>
+              <option value="Я читатель. Техническая проблема">Я читатель. Техническая проблема</option>
+              <option value="Нарушение правил сайта">Нарушение правил сайта</option>
+              <option value="Проблема оплаты">Проблема оплаты</option>
+              <option value="Пропал доступ к купленной книге">Пропал доступ к купленной книге</option>
+              <option value="Не могу войти в аккаунт">Не могу войти в аккаунт</option>
+              <option value="Мой аккаунт пустой">Мой аккаунт пустой</option>
+              <option value="Предложение по работе сайта">Предложение по работе сайта</option>
+              <option value="Другое">Другое</option>
             </select>
           </div>
         </label>
+
         <label class="support-request-form-label with-description">
           <p>Ссылка на проблему, если
             нужна</p>
           <p class="support-request-form-input-description">Проверьте ссылку. Чем она точнее, тем лучше</p>
           <input class="support-request-form-field with-description"
             :class="{ 'error-border-color': supportRequestFormErrors.problemLinkFormatError }" name="problemLink"
-            type="url" placeholder="https://author.today/..." @input="resetInputError('problemLinkFormatError')">
+            v-model="formData.problemLink" type="url" placeholder="https://author.today/..."
+            @input="resetInputError('problemLinkFormatError')">
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.problemLinkFormatError">Укажите, пожалуйста,
           корректный URL</p>
@@ -228,7 +230,7 @@
           </p>
           <input class="support-request-form-field"
             :class="{ 'error-border-color': supportRequestFormErrors.profileLinkFormatError || supportRequestFormErrors.requiredProfileLinkError }"
-            name="profileLink" type="url" placeholder="https://author.today/u/..."
+            name="profileLink" type="url" placeholder="https://author.today/u/..." v-model="formData.profileLink"
             @input="resetInputError('profileLinkFormatError', 'requiredProfileLinkError')">
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.requiredProfileLinkError">
@@ -244,7 +246,8 @@
           </p>
           <textarea class="support-request-form-field"
             :class="{ 'error-border-color': supportRequestFormErrors.requiredDescriptionError }"
-            name="problemDescription" @input="resetInputError(undefined, 'requiredDescriptionError')"></textarea>
+            name="problemDescription" v-model="formData.problemDescription"
+            @input="resetInputError(undefined, 'requiredDescriptionError')"></textarea>
         </label>
         <p class="input-error-message" v-if="supportRequestFormErrors.requiredDescriptionError">
           Пожалуйста, заполните все обязательные поля</p>
@@ -261,6 +264,8 @@
           Размер одного или нескольких файлов превышает 30 Мб</p>
         <p class="input-error-message" v-if="supportRequestFormErrors.fileQuantityError">
           Количество загружаемых изображений превышает допустимое число (10 шт.)</p>
+        <p class="input-error-message" v-if="supportRequestImages.length > 0">
+          Прикреплено: {{ supportRequestImages.length }} изображения</p>
 
         <div class="form-error-message" v-if="isFormErrorMessageshown">Пожалуйста, заполните все обязательные поля</div>
         <div class="center-text"><button class="support-form-btn" type="submit">Отправить</button>
@@ -455,7 +460,7 @@ function toggleHeight(index, type) {
   }
 }
 
-const handleOpenAnswer = (isPreviouslyOpened, index, type) => {
+function handleOpenAnswer(isPreviouslyOpened, index, type) {
   toggleHeight(index, type);
 
   if (type == "org") {
@@ -471,7 +476,7 @@ const handleOpenAnswer = (isPreviouslyOpened, index, type) => {
 //- В этой части кода валидируется и обрабатываются данные формы отправки запроса в поддержку.
 let isFormErrorMessageshown = ref(false);
 
-let supportRequestFormErrors = reactive({
+const supportRequestFormErrors = reactive({
   fileSizeError: false,
   fileQuantityError: false,
   requiredProfileLinkError: false,
@@ -480,10 +485,11 @@ let supportRequestFormErrors = reactive({
   requiredDescriptionError: false
 })
 
-const resetInputError = (formatError, errorOfRequired) => {
+const supportRequestImages = reactive([]);
+
+function resetInputError(formatError, errorOfRequired) {
   if (formatError) {
     supportRequestFormErrors[formatError] = false;
-    console.log(supportRequestFormErrors[formatError])
   }
   if (errorOfRequired) {
     supportRequestFormErrors[errorOfRequired] = false;
@@ -492,7 +498,7 @@ const resetInputError = (formatError, errorOfRequired) => {
   isFormErrorMessageshown.value = false;
 };
 
-const validateUrlField = (fieldParams) => {
+function validateUrlField(fieldParams) {
   if (fieldParams.required) {
     if (!fieldParams.value) {
       supportRequestFormErrors[fieldParams.requiredErrorName] = true;
@@ -518,18 +524,16 @@ const validateUrlField = (fieldParams) => {
       supportRequestFormErrors[fieldParams.formatRequiredErrorName] = true;
     }
   }
-
-
 }
 
-const validateProblemDescription = (value) => {
+function validateProblemDescription(value) {
   supportRequestFormErrors.requiredDescriptionError = false;
   if (!value) {
     supportRequestFormErrors.requiredDescriptionError = true;
   }
 }
 
-const validateSupportRequestFiles = (event) => {
+function validateSupportRequestFiles(event) {
   supportRequestFormErrors.fileQuantityError = false;
   supportRequestFormErrors.fileSizeError = false;
   const files = event.target.files;
@@ -538,51 +542,96 @@ const validateSupportRequestFiles = (event) => {
     supportRequestFormErrors.fileQuantityError = true;
     return
   }
+
   for (const file of files) {
     if (file.size > 30 * 1024 * 1024) {
       supportRequestFormErrors.fileSizeError = true;
+      return
     }
+  }
+  supportRequestImages.splice(0);
+  supportRequestImages.push(...files);
+}
+
+function validateSupportRequestForm(data) {
+  validateUrlField({ required: false, formatRequired: true, formatRequiredErrorName: "problemLinkFormatError", value: data.problemLink })// Валидация ссылки на проблему
+
+  validateUrlField({ required: true, requiredErrorName: "requiredProfileLinkError", formatRequired: true, formatRequiredErrorName: "profileLinkFormatError", value: data.profileLink })// Валидация ссылки на профиль
+
+  validateProblemDescription(data.problemDescription) // Валидация поля описания проблемы
+
+  const errorsValuesArray = Object.values(supportRequestFormErrors);
+  if (errorsValuesArray.includes(true)) {
+    console.table(supportRequestFormErrors)
+    isFormErrorMessageshown.value = true;
+    throw new Error("Форма не прошла валидацию!")
+  }
+}
+//-----------------------------------------------------------------
+
+//- В этой части кода происходит работа c хранилищем файлов и базой данных Firebase.
+import { firestoreDatabase, firebaseImageStorage } from '/firebase';
+import { collection, doc, setDoc } from "firebase/firestore";
+import { ref as firebaseStorageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+
+const formData = reactive({
+  problemName: "Нарушение правил сайта",
+  problemLink: "",
+  profileLink: "",
+  problemDescription: "",
+  imageLinks: []
+})
+
+async function sendImagesToStorage(images) {
+
+  try {
+    const uploadPromises = images.map((image) => {
+      const uniqueImageName = `${Date.now()}-${image.name}`;
+      const storageRef = firebaseStorageRef(firebaseImageStorage, `supportRequestImages/${uniqueImageName}`);
+      return uploadBytes(storageRef, image);
+    });
+
+    const uploadResults = await Promise.all(uploadPromises);
+
+    const urlPromises = uploadResults.map((uploadResult) => {
+      return getDownloadURL(firebaseStorageRef(firebaseImageStorage, uploadResult.metadata.fullPath));
+    });
+
+    const urls = await Promise.all(urlPromises);
+
+    formData.imageLinks.push(...urls);
+
+  } catch (error) {
+    console.error("Ошибка при загрузке изображений:", error);
+    formData.imageLinks.length = 0;
   }
 }
 
-const validateSupportRequestForm = (event) => {
+async function sendsupportRequestDataToDB() {
   isFormErrorMessageshown.value = false;
   supportRequestFormErrors.requiredProfileLinkError = false;
   supportRequestFormErrors.profileLinkFormatError = false;
   supportRequestFormErrors.problemLinkFormatError = false;
   supportRequestFormErrors.requiredDescriptionError = false;
 
-  const formData = new FormData(event.target)
 
-  const dataObject = {};
-  for (let [key, value] of formData.entries()) {
-    dataObject[key] = value;
+  validateSupportRequestForm(formData);
+
+  try {
+    if (supportRequestImages && supportRequestImages.length > 0) {
+      await sendImagesToStorage(supportRequestImages);
+    }
+
+    // Add a new document
+    const supportRequestsRef = doc(collection(firestoreDatabase, "supportRequests"));
+
+    // later...
+    await setDoc(supportRequestsRef, formData);
+
+  } catch (error) {
+    console.error("Ошибка при отправке данных запроса на поддержку: ", error);
   }
-
-  validateUrlField({ required: false, formatRequired: true, formatRequiredErrorName: "problemLinkFormatError", value: dataObject.problemLink })// Валидация ссылки на проблему
-
-  validateUrlField({ required: true, requiredErrorName: "requiredProfileLinkError", formatRequired: true, formatRequiredErrorName: "profileLinkFormatError", value: dataObject.profileLink })// Валидация ссылки на профиль
-
-  validateProblemDescription(dataObject.problemDescription) // Валидация поляч описания проблемы
-  // validateTextField({ required: true, requiredErrorName: "requiredDescriptionError", value: dataObject.problemDescription })
-
-  // validateUrlInput(dataObject.problemLink);
-  // validateUrlInput(dataObject.profileLink, true);
-  // validateProblemDescription(dataObject.problemDescription);
-
-  const errorsValuesArray = Object.values(supportRequestFormErrors);
-  if (errorsValuesArray.includes(true)) {
-    console.table(supportRequestFormErrors)
-    console.log("Форма не прошла валидацию");
-    isFormErrorMessageshown.value = true;
-    return
-  }
-
-  console.log("Валидация успешна");
-  alert("Палетела малышка!!!!")
-  // fethc("POST", ...formData...)
-}
-//-----------------------------------------------------------------
+};
 </script>
 
 <style>
