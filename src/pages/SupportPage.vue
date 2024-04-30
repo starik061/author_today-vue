@@ -499,6 +499,9 @@ function resetInputError(formatError, errorOfRequired) {
 };
 
 function validateUrlField(fieldParams) {
+  // Регулярное выражение для проверки URL
+  const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
+
   if (fieldParams.required) {
     if (!fieldParams.value) {
       supportRequestFormErrors[fieldParams.requiredErrorName] = true;
@@ -506,19 +509,12 @@ function validateUrlField(fieldParams) {
     } else if (fieldParams.formatRequired) {
       supportRequestFormErrors[fieldParams.formatRequiredErrorName] = false;
 
-      // Регулярное выражение для проверки URL
-      const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
-
       // Проверяем, соответствует ли ввод шаблону URL
       if (!urlPattern.test(fieldParams.value)) {
         supportRequestFormErrors[fieldParams.formatRequiredErrorName] = true;
       }
     }
   } else if (fieldParams.value) {
-
-    // Регулярное выражение для проверки URL
-    const urlPattern = /^(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})$/;
-
     // Проверяем, соответствует ли ввод шаблону URL
     if (!urlPattern.test(fieldParams.value)) {
       supportRequestFormErrors[fieldParams.formatRequiredErrorName] = true;
