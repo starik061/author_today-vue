@@ -186,6 +186,7 @@ function validateSupportRequestForm(data) {
         // console.table(supportRequestFormErrors)
         isFormMessageshown.value = true;
         formMessage.value = "Проверьте правильность заполнения полей формы";
+        isLoading.value = false;
         throw new Error("Форма не прошла валидацию!")
     }
 }
@@ -226,6 +227,7 @@ async function sendImagesToStorage(images) {
         isFormMessageshown.value = true;
         formMessage.value = "Ошибка при отправке изображений";
         formData.imageLinks.length = 0;
+        isLoading.value = false;
     }
 }
 
